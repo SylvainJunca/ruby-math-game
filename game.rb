@@ -22,6 +22,8 @@ class Game
       initialize_players
       while(!@game_over)
         player_name = players[@turn.current_player].name
+        puts "------New Turn------"
+        sleep 0.7
         puts "#{player_name} you play !"
         puts "------Question-------"
         question = Question.new(player_name)
@@ -41,12 +43,14 @@ class Game
       puts "#{players[@turn.current_player].name} loses 1 point"
       if players[@turn.current_player].lives == 0
         @game_over = true
-        puts "#{players[@turn.current_player].name} loses the GAME !!!!"
+        @turn.play_next
+        puts "#{players[@turn.current_player].name} wins the GAME !!!!"
       end
     end
 
 
     def summary
+      sleep 0.7
       puts "------SUMMARY------"
       players.each {|player| puts "#{player.name} has #{player.lives} points"}
     end
